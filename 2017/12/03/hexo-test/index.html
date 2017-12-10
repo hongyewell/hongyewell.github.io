@@ -7,16 +7,16 @@
   
   <title>hexo test | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="hello word! hongyewell test！">
+  <meta name="description" content="What are some of the lesser known features of Google Guava that every developer could use?你知道Google Guava一些鲜为人知的，但是每个开发者都可以使用的特性是什么吗？ It’s one of the most popul">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo test">
 <meta property="og:url" content="http://yoursite.com/2017/12/03/hexo-test/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="hello word! hongyewell test！">
-<meta property="og:updated_time" content="2017-12-03T14:22:04.199Z">
+<meta property="og:description" content="What are some of the lesser known features of Google Guava that every developer could use?你知道Google Guava一些鲜为人知的，但是每个开发者都可以使用的特性是什么吗？ It’s one of the most popular libraries out there, it’s open source">
+<meta property="og:updated_time" content="2017-12-10T15:35:07.203Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo test">
-<meta name="twitter:description" content="hello word! hongyewell test！">
+<meta name="twitter:description" content="What are some of the lesser known features of Google Guava that every developer could use?你知道Google Guava一些鲜为人知的，但是每个开发者都可以使用的特性是什么吗？ It’s one of the most popular libraries out there, it’s open source">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -85,7 +85,33 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>hello word! hongyewell test！</p>
+        <p>What are some of the lesser known features of Google Guava that every developer could use?<br>你知道Google Guava一些鲜为人知的，但是每个开发者都可以使用的特性是什么吗？</p>
+<p>It’s one of the most popular libraries out there, it’s open source, you probably know it already,<br>这是现在非常受欢迎的一个类库，是开源的，你可能早就听说过她。</p>
+<p>and it comes from a place where people play Quidditch as a real sport (At least on The Internship).<br>她来自于一个地方，这里人们将“魁地奇”当作真实的比赛进行玩耍。（至少实习期间是这样）</p>
+<p> It’s not the Hogwarts library from Harry Potter but it does have lots of spells up its sleeve:<br>这不是来自哈利珀特的魔法类库，但是她的确具有很多隐藏的功能。<br>hogwarts<br>霍格华兹（小说哈利波特里的一家魔法学校名）</p>
+<p>Google Guava contains a range of core Java libraries that were born internally at Google, battle-tested in production and publicly released.<br>Google Guava 包含了一系列的在Google内部诞生的java核心类库，并在生产环境中进行实战测试，然后最终公开发布。</p>
+<p>And it also had Optional before it appeared on Java 8.<br>而且在Java 8 出现之前，她也为我们提供了很多选择。</p>
+<p>The main focus of Guava is improving the workflow around common tasks with utilities that help write better, cleaner code, and be more productive.<br>Guava致力于提供公共方法来提高常见任务的工作流程，使编码更好，更简洁，更高效。</p>
+<p>Most famous for its collections and caching capabilities, it contains many more useful yet little known features.<br>Guava的集合和缓存功能非常有名，她包含很多很有用但又鲜为人知的一些特性。</p>
+<p>For collections and caching it introduced improvements on the JDKs collection API and filled in the void of the missing (yet long awaited) JCache that was finally released last year.<br>针对集合和缓存，她介绍了对JDK 集合 API的提升，并且完成了….</p>
+<p>In this post I’d like to share with you some of Google Guava’s feature we like to use here at Takipi and some more interesting discoveries that we just made.<br>在这篇文章中，我想和大家分享一些我们在Takipi使用的谷歌Guava的一些特性，以及我们刚刚做的一些有趣的发现。</p>
+<p>Note: Guava supports Java 6 and above.<br>备注：Guava支持 Java 6及以上。</p>
+<ol>
+<li>Unsigned Primitives: They exist!<br>无符号的基本数据类型，他们已经有了。</li>
+</ol>
+<p>One of the lesser known features of Java 8 is a new workaround for Unsigned Primitives in the Integer class.<br>Java 8的一个不太为人所知的特性是在整数类中为无符号的基本数据类型进行新的开发。</p>
+<p>An even lesser known feature of Guava is that all of this has already been available years before the Java 8 release and can be used today for Java 6 and above.<br>Guava的一个更不为人所知的特性是，在Java 8发布的前几年，所有的这些都已经可以使用了，现在可以在Java 6及以上版本使用。</p>
+<p>Let’s get a peek of how it’s handled in Guava.<br>让我们来看看Guava是如何处理的。</p>
+<p>We have 2 options before us and it’s up to us to remain consistent:<br>Dealing with the primitive type directly as int, and keeping in mind it’s Unsigned in our logic:<br>在我们面前有两种选择，我们必须保持一致:<br>对与基本数据类型的处理，记住它在我们的逻辑中是无符号的:</p>
+<p>int notReallyInt = UnsignedInts.parseUnsignedInt(4294967295);  // Max unsigned int</p>
+<p>String maxUnsigned = UnsignedInts.toString(notReallyInt);  // We’re legit!   我们是合法的</p>
+<p>UnsignedInts and UnsignedLongs also support methods like compare, divide, min, max and more.<br>无符号的int 和无符号的long 同样支持比较、拆分、最小、最大等方法。</p>
+<p>A wrapper to avoid dealing with primitives directly and cause mistakes:<br>避免直接处理原生数据类型，并导致错误的包装类：</p>
+<p>UnsignedInteger newType = UnsignedInteger.valueOf(maxUnsigned);<br> newType = newType.plus(UnsignedInteger.valueOf(“1”)); // Increment</p>
+<p>UnsignedInteger and UnsignedLong also support methods like minus, times, dividedBy and mod.</p>
+<p>UnsignedInteger和UnsignedLong也支持诸如负、times、dividedBy和mod这样的方法。</p>
+<p>Java没有无符号类型，都是有符号类型的数据类型。但是其它语言，如c的unsigned short 无符号数，它值的范围就是要从0开始，并且比java的short类型保存的数据范围更大。<br>有符号数与无符号数的区别：<br>最明显的区别就是二者表示的范围不同： 无符号数中，所有的位都用于直接表示该值的大小。<br>有符号数中最高位用于表示正负，所以，当为正值时，该数的最大值就会变小。<br>如下：<br>无符号数： 1111 1111 值：255 1<em> 27 + 1</em> 26 + 1<em> 25 + 1</em> 24 + 1<em> 23 + 1</em> 22 + 1<em> 21 + 1</em> 20<br>有符号数： 0111 1111 值：127 1<em> 26 + 1</em> 25 + 1<em> 24 + 1</em> 23 + 1<em> 22 + 1</em> 21 + 1* 20<br>同样是一个字节，无符号数的最大值是255，而有符号数的最大值是127。<br>原因是有符号数中的最高位被挪去表示符号了。<br>并且，最高位的权值也是最高的（对于1字节数来说是2的7次方=128），所以仅仅少于一位，最大值一下子减半。<br>不过，有符号数的长处是它可以表示负数。<br>因此，虽然它的在最大值缩水了，却在负值的方向出现了伸展。<br>如下：<br>无符号数： 0 —————– 255 有符号数： -128 ——— 0 ———- 127<br>同样是一个字节，无符号的最小值是 0 ，而有符号数的最小值是-128。<br>所以二者能表达的不同的数值的个数都一样是256个。<br>只不过前者表达的是0到255这256个数，后者表达的是-128到+127这256个数<br>有符号数包括负数，无符号数只有整数而已，在同一数据类型中，由于内存长度是一样的，所以无符号数比有符号数的最大值大1倍。</p>
+<p>在实际开发中，可能要与c写的硬件接口，网络接口相互直接数据交互，此时由于java没有无符号的数据类型，导致java与c看似相同的数据类型，其实存储空间确是不同的，这个问题解决方法是java用更高的存储数据类型，如果c用int，你的java就要考虑用Long或者BigInteger了。还有一种方法就是用java的guava框架。</p>
 
       
     </div>
